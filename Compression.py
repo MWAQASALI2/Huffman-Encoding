@@ -107,8 +107,24 @@ def MakeBinaryFile(binary):
         binaryfile.write(bytes([integer]))
     binaryfile.close()
 
- def saveFrequencyTable(frequencies):
+def saveFrequencyTable(frequencies):
     file=open("Frequencies.json","w")
     json.dump(frequencies,file)
     file.close()
+
+
+
+
+def Compress_Whole(file_name):
+    Frequencies=text_frequency_count(file_name)
+    pq=pqinitialisation()
+    Insertsingletons(Frequencies,pq)
+    Huffman_Tree=Build_Huffman_Tree(pq)
+    Encoding_Map={}
+    Build_Encoding_Map(Huffman_Tree,"",Encoding_Map)
+    binary=Encode(file_name,Encoding_Map)
+    MakeBinaryFile(binary)
+    saveFrequencyTable(Frequencies)
+
+
 

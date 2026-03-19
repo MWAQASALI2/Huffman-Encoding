@@ -55,6 +55,14 @@ def Write_Text_To_File(string):
     file.write(string)
     file.close()
 
+def Decompress_Whole(CompressedFile):
+    Frequency_Table=GetFrequencyTable(Frequenciesjson)
+    Huffman_Tree=Reconstruct_Huffman_Tree(Frequenciesjson)
+    binarystring=BinaryFiletoBinaryString(CompressedFile)
+    string=Binary_String_To_Text(Huffman_Tree,binarystring)
+    Write_Text_To_File(string)
+        
+
 
 
         
