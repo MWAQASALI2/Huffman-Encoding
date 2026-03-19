@@ -6,6 +6,7 @@
 5:Encode the data(Use the encoding map to convert the strings to new binary representations)
 6: Write the binary string to a binary file
 """
+import json
 
 
 class Node:
@@ -28,7 +29,7 @@ def text_frequency_count(file_name):
                 frequencies[char]+=1
 
     #Adding the psuedo end of file character
-    frequencies[256]=1 #An integer is never a character in the text file
+    frequencies[chr(0)]=1 # chr(0) is Null
     file.close()
 
     return frequencies
@@ -63,7 +64,7 @@ def pqdequeue(pq):
 def Insertsingletons(frequencies,pq):
     for character,frequency in frequencies.items():
         obj=Node(character,frequency)
-        pqenqueue(pq,obj)
+        pqenqueue(pq,obj)   
 
 
 def Build_Huffman_Tree(pq):
@@ -91,7 +92,7 @@ def Encode(filename,Encoding_Map):
         for char in line:
             binary+=Encoding_Map[char]
 
-    binary+=Encoding_Map[256]
+    binary+=Encoding_Map[chr(0)]
     file.close()
     return binary
 
@@ -105,4 +106,9 @@ def MakeBinaryFile(binary):
         integer=int(binary[i:i+8],2)
         binaryfile.write(bytes([integer]))
     binaryfile.close()
-    
+
+ def saveFrequencyTable(frequencies):
+    file=open("Frequencies.json","w")
+    json.dump(frequencies,file)
+    file.close()
+
