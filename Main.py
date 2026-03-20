@@ -1,11 +1,12 @@
-from Compression import Compress_Whole
-from Decompress import Decompress_Whole
-from os.path import getsize
 ''' Compression.py takes a .txt file and produces a .bin file and a .json file.
 Decompress.py takes a .bin file , finds the corresponding .json file and produces a .txt file.
 So the compressed file is actually the .bin file but to decompress you need the .bin file along with the .json file so when calculating size of compressed 
 files add the size of .bin and .json file.
 '''
+from Compression import Compress_Whole
+from Decompress import Decompress_Whole
+from os.path import getsize
+
 option=""
 while option!="C" and option!="D":
     option=input("To compress press C and to decompress press D: ").upper()
