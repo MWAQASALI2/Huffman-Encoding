@@ -4,7 +4,7 @@
 3: Read the binary string and use the huffman tree to convert it into a string
 4: Write to a text file
 """
-from Compression import Insertsingletons,Build_Huffman_Tree,pqinitialisation,pqenqueue,pqdequeue,Node
+from Compression import Insertsingletons,Build_Huffman_Tree,lstinitialisation,lstenqueue,lstdequeue,Node
 import json
 
 def GetFrequencyTable(Frequenciesjson):
@@ -28,10 +28,10 @@ def BinaryFiletoBinaryString(compressedfile):
 
 
 def Reconstruct_Huffman_Tree(BinaryCompressedFile):
-    pq=pqinitialisation()
+    lst=lstinitialisation()
     FrequencyTable=GetFrequencyTable(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+".json")
-    Insertsingletons(FrequencyTable,pq)
-    Huffman_Tree=Build_Huffman_Tree(pq)
+    Insertsingletons(FrequencyTable,lst)
+    Huffman_Tree=Build_Huffman_Tree(lst)
     return Huffman_Tree
 
 def Binary_String_To_Text(Huffman_Tree,binarystring):

@@ -37,46 +37,46 @@ def text_frequency_count(file_name):
 
 
 
-def pqinitialisation():
-    pq=[]
-    return pq
+def lstinitialisation():
+    lst=[]
+    return lst
 
-def pqenqueue(pq,node):
-    pq.append(node)
+def lstenqueue(lst,node):
+    lst.append(node)
 
     
     
 
 
-def pqdequeue(pq):
-    lowestfreq=pq[0].frequency
+def lstdequeue(lst):
+    lowestfreq=lst[0].frequency
     lowestfreqindex=0
-    for i in range(1,len(pq)):
-        if pq[i].frequency<lowestfreq:
-            lowestfreq=pq[i].frequency
+    for i in range(1,len(lst)):
+        if lst[i].frequency<lowestfreq:
+            lowestfreq=lst[i].frequency
             lowestfreqindex=i
-    lowestfreqnode=pq[lowestfreqindex]
-    pq.pop(lowestfreqindex)
+    lowestfreqnode=lst[lowestfreqindex]
+    lst.pop(lowestfreqindex)
     return lowestfreqnode
 
 
 
 
-def Insertsingletons(frequencies,pq):
+def Insertsingletons(frequencies,lst):
     for character,frequency in frequencies.items():
         obj=Node(character,frequency)
-        pqenqueue(pq,obj)   
+        lstenqueue(lst,obj)   
 
 
-def Build_Huffman_Tree(pq):
-    while len(pq)!=1:
-        low=pqdequeue(pq)
-        newlow=pqdequeue(pq)
+def Build_Huffman_Tree(lst):
+    while len(lst)!=1:
+        low=lstdequeue(lst)
+        newlow=lstdequeue(lst)
         internalnode=Node(None,low.frequency+newlow.frequency)
         internalnode.left=low
         internalnode.right=newlow
-        pqenqueue(pq,internalnode)
-    return pqdequeue(pq) #This is the huffman or mapping tree
+        lstenqueue(lst,internalnode)
+    return lstdequeue(lst) #This is the huffman or mapping tree
 
 def Build_Encoding_Map(node,binary,encodingmap):
     if node.left is None and node.right is None:
@@ -118,9 +118,9 @@ def saveFrequencyTable(frequencies,filename):
 
 def Compress_Whole(file_name):
     Frequencies=text_frequency_count(file_name)
-    pq=pqinitialisation()
-    Insertsingletons(Frequencies,pq)
-    Huffman_Tree=Build_Huffman_Tree(pq)
+    lst=lstinitialisation()
+    Insertsingletons(Frequencies,lst)
+    Huffman_Tree=Build_Huffman_Tree(lst)
     Encoding_Map={}
     Build_Encoding_Map(Huffman_Tree,"",Encoding_Map)
     binary=Encode(file_name,Encoding_Map)
