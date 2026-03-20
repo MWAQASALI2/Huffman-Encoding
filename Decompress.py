@@ -21,15 +21,15 @@ def BinaryFiletoBinaryString(compressedfile):
     byte=file.read(1)
     while byte:
         integer=byte[0]
-        binarystring+=bin(integer[2:].zfill(8))
+        binarystring+=bin(integer)[2:].zfill(8) # integer to binary string remove first 2 then fill zeros to make its length 8
         byte=file.read(1)
-    file.close()
+    file.close()    
     return binarystring
 
 
-def Reconstruct_Huffman_Tree(Frequenciesjson):
+def Reconstruct_Huffman_Tree(BinaryCompressedFile):
     pq=pqinitialisation()
-    FrequencyTable=GetFrequencyTable(Frequenciesjson)
+    FrequencyTable=GetFrequencyTable(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+".json")
     Insertsingletons(FrequencyTable,pq)
     Huffman_Tree=Build_Huffman_Tree(pq)
     return Huffman_Tree
@@ -50,17 +50,31 @@ def Binary_String_To_Text(Huffman_Tree,binarystring):
         i+=1
     return string
 
-def Write_Text_To_File(string):
-    file=open("Textuncompressed.txt","w")
+def Write_Text_To_File(string,binarydecompressfile):
+    file=open(binarydecompressfile[0:len(binarydecompressfile)-4]+"uncompressed"+".txt","w")
     file.write(string)
     file.close()
 
-def Decompress_Whole(CompressedFile):
-    Frequency_Table=GetFrequencyTable(Frequenciesjson)
-    Huffman_Tree=Reconstruct_Huffman_Tree(Frequenciesjson)
-    binarystring=BinaryFiletoBinaryString(CompressedFile)
+
+def Decompress_Whole(BinaryCompressedFile):#This compressedFile is the binary file
+    Huffman_Tree=Reconstruct_Huffman_Tree(BinaryCompressedFile)
+    binarystring=BinaryFiletoBinaryString(BinaryCompressedFile)
     string=Binary_String_To_Text(Huffman_Tree,binarystring)
-    Write_Text_To_File(string)
+    Write_Text_To_File(string,BinaryCompressedFile)
+    Originalfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+".txt","r")
+    Uncompressedfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+"uncompressed"+".txt","r")
+    Originalstring=""
+    Uncompressedstring=""
+    for line in Originalfile:
+        Originalstring+=line
+    for line in Uncompressedfile:
+        Uncompressedstring+=line
+    Originalfile.close()
+    Uncompressedfile.close()
+    if Originalstring==Uncompressedstring:
+        return "Uncompressed and original file match"
+    else:
+        return"Uncompressed and original file do not  match"
         
 
 
