@@ -3,9 +3,10 @@
 2:Make a list of binary trees using characters and frequencies
 3:Convert all the binary trees into a single huffman tree
 4:Build an encoding map
-5:Encode the data(Use the encoding map to convert the strings to new binary representations)
+5:Encode the data(Use the encoding map to convert the strings to new binary representations) 
 6: Write the binary string to a binary file
 7:Store the frequency table in a json file , used in decompression to reconstruct the Huffman tree
+Psuedo eof is there too (in the Huffman tree and also in the encoding too)
 """
 import json
 
@@ -20,7 +21,7 @@ class Node:
 
 
 def text_frequency_count(file_name):
-    file=open(file_name,"r")
+    file=open(file_name,"r",encoding="utf-8")
     frequencies={}
     for line in file:
         for char in line:
@@ -88,12 +89,12 @@ def Build_Encoding_Map(node,binary,encodingmap):
 
 def Encode(filename,Encoding_Map):
     binary=""
-    file=open(filename,"r")
+    file=open(filename,"r",encoding="utf-8")
     for line in file:
         for char in line:
             binary+=Encoding_Map[char]
 
-    binary+=Encoding_Map[chr(0)]
+    binary+=Encoding_Map[chr(0)] 
     file.close()
     return binary
 

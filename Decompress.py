@@ -51,7 +51,7 @@ def Binary_String_To_Text(Huffman_Tree,binarystring):
     return string
 
 def Write_Text_To_File(string,binarydecompressfile):
-    file=open(binarydecompressfile[0:len(binarydecompressfile)-4]+"uncompressed"+".txt","w")
+    file=open(binarydecompressfile[0:len(binarydecompressfile)-4]+"uncompressed"+".txt","w",encoding="utf-8")
     file.write(string)
     file.close()
 
@@ -61,8 +61,8 @@ def Decompress_Whole(BinaryCompressedFile):#This compressedFile is the binary fi
     binarystring=BinaryFiletoBinaryString(BinaryCompressedFile)
     string=Binary_String_To_Text(Huffman_Tree,binarystring)
     Write_Text_To_File(string,BinaryCompressedFile)
-    Originalfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+".txt","r")
-    Uncompressedfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+"uncompressed"+".txt","r")
+    Originalfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+".txt","r",encoding="utf-8")
+    Uncompressedfile=open(BinaryCompressedFile[0:len(BinaryCompressedFile)-4]+"uncompressed"+".txt","r",encoding="utf-8")
     Originalstring=""
     Uncompressedstring=""
     for line in Originalfile:
