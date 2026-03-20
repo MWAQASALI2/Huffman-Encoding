@@ -1,6 +1,6 @@
 """ To compress we use disparity between frequencies and use variable length encoding Less bits for frequent characters and vice versa
 1: Count frequencies and create a dictionary
-2:Make a priority queue of binary trees using characters and frequencies
+2:Make a list of binary trees using characters and frequencies
 3:Convert all the binary trees into a single huffman tree
 4:Build an encoding map
 5:Encode the data(Use the encoding map to convert the strings to new binary representations)

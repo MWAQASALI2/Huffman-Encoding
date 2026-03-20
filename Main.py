@@ -25,9 +25,9 @@ elif option=="D":
         totalcompressedsize=(getsize(filename)+getsize(jsonfile))/1024 #binary file +jsonfile
         textfilesizeoriginal=getsize(textfileoriginal)/1024
         sizereduced=(((textfilesizeoriginal-totalcompressedsize)/textfilesizeoriginal)*100)
-        print("Uncompressed and original file match")
+        print("Uncompressed and original file match!")
         print("The size of the compressed files consists of json and binary file.")
-        print("Original: "+str(round(textfilesizeoriginal,2))+"KB---------> "+"Compressed: "+str(round(totalcompressedsize,2))+"KB ("+str(int(sizereduced))+" % smaller"+")" )
+        print("Original: "+str(round(textfilesizeoriginal,2))+"KB---------> "+"Compressed(json+binary): "+str(round(totalcompressedsize,2))+"KB ("+str(int(sizereduced))+" % smaller"+")" )
     elif status =="Uncompressed and original file do not  match":
         print("Uncompressed and original file do not  match")
 
