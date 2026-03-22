@@ -13,12 +13,14 @@ while option!="C" and option!="D":
 if option=="C":
     filename=input("Enter the file name to compress: ")
     Compress_Whole(filename)
+    print('DONE')
 elif option=="D":
     filename=input("Enter the compressed binary file name to Decompress: ")
     while filename[len(filename)-4:len(filename)]!=".bin":
         filename=input("Enter the compressed binary file name to Decompress: ")
 
     status=Decompress_Whole(filename)
+    print("DONE")
     if status=="Uncompressed and original file match":
         jsonfile=filename[0:len(filename)-4]+".json"
         textfileoriginal=filename[0:len(filename)-4]+".txt"

@@ -17,12 +17,13 @@ def GetFrequencyTable(Frequenciesjson):
 #Binary byte to integer to a long binary string
 def BinaryFiletoBinaryString(compressedfile):
     file=open(compressedfile,"rb")
-    binarystring=""
+    binaryList=[] #Intermediate list for performance
     byte=file.read(1)
     while byte:
         integer=byte[0]
-        binarystring+=bin(integer)[2:].zfill(8) # integer to binary string remove first 2 then fill zeros to make its length 8
+        binaryList.append(bin(integer)[2:].zfill(8)) # integer to binary string remove first 2 then fill zeros to make its length 8
         byte=file.read(1)
+    binarystring="".join(binaryList)
     file.close()    
     return binarystring
 
